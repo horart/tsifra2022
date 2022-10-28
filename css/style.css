@@ -1,0 +1,135 @@
+* {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0%;
+}
+
+html {
+    height: calc(100vh - 3px);
+    width: 100%;
+    padding: 0;
+}
+
+#kont .bar {
+    position: relative;
+    width: 1300px;
+    height: 52px;
+    background: #FF801C;
+    opacity: 0.4;
+    border-radius: 5px 5px 0 0;
+    z-index: -1;
+}
+
+#kont .footer {
+    position: absolute;
+    z-index: 8;
+    display: flex;
+    width: 1300px;
+    height: 50px;
+    background: #FF801C;
+    opacity: 0.4;
+    border-radius: 0px 0px 5px 5px;
+    bottom: 0px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#kont {
+    position: relative;
+    margin-left: 0px;
+    top: 5px;
+    width: 100%;
+    height: 100%;
+    max-width: 1300px;
+    border-radius: 5px;
+}
+
+#kont #backgroundofkont {
+    position: absolute;
+    width: 1300px;
+    height: calc(100% - 101px);
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0.9;
+}
+
+#kont #messages li {
+    position: relative;
+}
+
+#kont #messages {
+    height: 100%;
+    position: relative;
+}
+
+#kont .a {
+    list-style-type: none;
+    position: absolute;
+    word-wrap: break-word;
+    right: 0px;
+    width: fit-content;
+    box-shadow: 0 1px 1px grey;
+    border-radius: 20px 0 20px 20px;
+    padding: 10px;
+    padding-left: 30px;
+    width: 450px;
+    margin-left: calc(100% - 500px);
+    margin-right: 0%;
+    background: #e6e6e6;
+    color: black;
+    margin-top: 5px;
+}
+
+#kont .b {
+    margin-right: 110px;
+    margin-top: 5px;
+    list-style-type: none;
+    word-wrap: break-word;
+    width: fit-content;
+    max-width: 500px;
+    left: -30px;
+    border-radius: 0 20px 20px 20px;
+    padding: 10px;
+    padding-right: 30px;
+    background: #FF7000;
+    color: white;
+    box-shadow: 0 2px 5px grey;
+}
+
+#kont .smile img {
+    position: relative;
+}
+
+#kont .text input {
+    bottom: 0px;
+    z-index: 9;
+    left: 50px;
+    border-radius: 15px;
+    width: 80vw;
+    max-width: 1200px;
+    height: 42px;
+    resize: none;
+}
+
+#kont .send img {
+    bottom: 5px;
+    right: 5px;
+}
+
+#kont #backgroundofkont {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#kont #name {
+    position: absolute;
+    left: 130px;
+    line-height: 50px;
+    color: white
+}
