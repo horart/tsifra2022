@@ -1,0 +1,20 @@
+1. ajax.php?type=reg
+POST:
+code -- код
+name -- имя
+surname -- фамилия
+FILES:
+avatar -- аватар
+
+ЕСЛИ ТОЛЬКО КОД, ТО ЕСЛИ ЕСТЬ ДАННЫЕ, ПЕРЕКИДЫВАЕМ НА ЧАТ (200). ЕСЛИ ИХ НЕТ, ПРОСИМ ВВЕСТИ С КОДОМ 301
+
+2. ajax.php?type=message
+POST:
+code -- код усера
+is_file -- 1 если файл, 0 если нет
+is_problem -- 1 если проблема, 0 если нет
+text -- текст
+FILES:
+attachment -- фото
+
+text ИЛИ attachment
