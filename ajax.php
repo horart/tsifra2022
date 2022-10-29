@@ -12,16 +12,19 @@ switch ($_GET['type']) {
         $fa = $search->fetchAll();
         if(!count($fa)) {
             http_response_code(403);
+            header('Location: /');
             exit();
         }
         $exists = $fa[0]['is_regged'];
         if($exists) {
             http_response_code(301);
+            header('Location: /messenger.html')
             $_SESSION['code'] = $code;
             exit();
         }else{
             if(!($_POST['name'] && $_POST['surname'])) {
                 http_response_code(400);
+                header('Location: /auth.html')
                 exit();
             }else{
                 $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, is_regged = 1 WHERE code = ?');
