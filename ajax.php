@@ -52,6 +52,7 @@ switch ($_GET['type']) {
             http_response_code(403);
             exit();
         }
+        $last = $_POST['last'];
         
         break;
     default:
