@@ -143,6 +143,21 @@ $(document).ready(function() {
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 
     $('#kont .send').css('cursor', 'pointer');
+    
+    fetch("/ajax.php?type=poll", requestOptions)
+        .then(response => response.json())
+        .then(function(res) {
+            res.forEach(msg => {
+                let is_image = msg['is_image'] ? 1 : 0;
+                if(msg['mine']) {
+                    my_new_message(is_image ? '' : msg['content'], is_image ? '/attachments/' + msg['content'] + '.jpg' : undefined);
+                }
+                else {
+                    new_message(is_image ? '' : msg['content'], msg['name'], is_image ? '/attachments/' + msg['content'] + '.jpg' : undefined);
+                }
+            })
+        })
+        .catch(error => console.log('error', error));
 
     setInterval(poll, 1000);
 });
