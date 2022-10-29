@@ -1,5 +1,5 @@
 var img_bool = false;
-var img_code;
+var img_code = 0;
 
 function new_message(text, name) {
     $('#kont #backgroundofkont #messages').append('<li class="a">' + text + '</li>');
@@ -47,6 +47,9 @@ function send() {
         });
     }
 }
+
+
+
 
 function upload(selector, accept) {
     const input = document.querySelector(selector);
