@@ -229,7 +229,7 @@ html {
 
 #kont #backgroundofkont {
     overflow: scroll;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 #kont #name {
