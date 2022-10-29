@@ -4,22 +4,22 @@ var img_code = 0;
 function new_message(text, name, img) {
     if (img) {
         $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '<img src="' + img + '" /></li>');
-        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+        $("#kont #backgroundofkont").stop().animate({ scrollTop: 10000 }, "slow");
         return
     }
     $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '</li>');
-    $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+    $("#kont #backgroundofkont").stop().animate({ scrollTop: 10000 }, "slow");
 }
 
 function my_new_message(text, img) {
     $('#kont .text input').val('').empty();
     if (img) {
         $('#kont #backgroundofkont #messages').append('<li class="b">' + text + '<br><img src="' + img + '" /></li>');
-        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+        $("#kont #backgroundofkont").stop().animate({ scrollTop: 10000 }, "slow");
         return
     }
     $('#kont #backgroundofkont #messages').append('<li class="b">' + text + '</li>');
-    $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+    $("#kont #backgroundofkont").stop().animate({ scrollTop: 10000 }, "slow");
 }
 
 function poll() {
@@ -31,7 +31,8 @@ function poll() {
         .then(response => response.json())
         .then(function(res) {
             res.forEach(msg => {
-                new_message(msg['content'], msg['name']);
+                let is_image = msg['is_image'] == '1';
+                new_message(is_image ? '' : msg['content'], msg['name'], is_image ? '/attachments/' + msg['content'] + '.jpg' : undefined);
             })
         })
         .catch(error => console.log('error', error));
@@ -139,7 +140,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+    $("#kont #backgroundofkont").stop().animate({ scrollTop: 10000 }, "slow");
 
     $('#kont .send').css('cursor', 'pointer');
     let requestOptions = {

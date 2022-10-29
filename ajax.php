@@ -12,25 +12,24 @@ switch ($_GET['type']) {
         $fa = $search->fetchAll();
         if(!count($fa)) {
             http_response_code(403);
+            header('Location: /');
             exit();
         }
         $exists = $fa[0]['is_regged'];
         if($exists) {
             http_response_code(301);
+            header('Location: /messenger.html');
             $_SESSION['code'] = $code;
             exit();
         }else{
-            if(!($_POST['name'] && $_POST['surname'] && $_FILES['avatar'])) {
+            if(!($_POST['name'] && $_POST['surname'])) {
                 http_response_code(400);
+                header('Location: /auth.html');
                 exit();
             }else{
-                $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, avatar = ?, is_regged = 1 WHERE code = ?');
-                $file = $_FILES['avatar'];
-                $avatar = uniqid();
-                var_dump($file);
-                file_put_contents("avatars/$avatar.jpg", file_get_contents($file['tmp_name']));
+                $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, is_regged = 1 WHERE code = ?');
                 $_SESSION['code'] = $code;
-                $reg->execute([$_POST['name'], $_POST['surname'], $avatar, $code]);
+                $reg->execute([$_POST['name'], $_POST['surname'], $code]);
                 exit();
             }
         }
@@ -60,7 +59,7 @@ switch ($_GET['type']) {
             http_response_code(403);
             exit();
         }
-        if(isset($_SESSION['last'])) {
+        if($_SESSION['last']) {
             $last = $_SESSION['last'];
         }else{
             $last = 0;
