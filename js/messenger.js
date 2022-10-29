@@ -66,6 +66,7 @@ function send() {
         const preview = document.getElementById("img_up");
         preview.innerHTML = '';
         my_new_message(message_txt, img_code)
+        img_bool = false;
     }
     img_code = 0;
 }
@@ -120,10 +121,6 @@ function upload(selector, accept) {
     }
     input.addEventListener("change", changeHandler);
 }
-
-
-
-
 
 
 
