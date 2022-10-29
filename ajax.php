@@ -40,8 +40,8 @@ switch ($_GET['type']) {
             http_response_code(403);
             exit();
         }
-        $problem = $_POST['is_problem'] == '1';
-        $file = $_POST['is_file'] == '1';
+        $problem = $_POST['is_problem'];
+        $file = $_POST['is_file'];
         if(!$file) {
             $content = $_POST['text'];
         }else{
