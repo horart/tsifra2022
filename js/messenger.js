@@ -1,5 +1,5 @@
 var img_bool = false;
-var img_code;
+var img_code = 0;
 
 function send() {
     var messege_txt = $('#kont .text input').val();
@@ -22,6 +22,9 @@ async function uploadFile() {
     });
     alert('The file has been uploaded successfully.');
 }
+
+
+
 
 function upload(selector, accept) {
     const input = document.querySelector(selector);
