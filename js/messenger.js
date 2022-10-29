@@ -12,6 +12,7 @@ function new_message(text, name, img) {
 }
 
 function my_new_message(text, img) {
+    $('#kont .text input').val('').empty();
     if (img) {
         $('#kont #backgroundofkont #messages').append('<li class="b">' + text + '<br><img src="' + img + '" /></li>');
         $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
