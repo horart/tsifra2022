@@ -8,7 +8,12 @@ switch ($_GET['type']) {
         $code = $_POST['code'];
         $search = $db->prepare('SELECT is_regged FROM codes WHERE code = ?');
         $search->execute([$code]);
-        $exists = count($search->fetchAll());
+        $fa = $search->fetchAll();
+        if(!count($fa)) {
+            http_response_code(403);
+            exit();
+        }
+        $exists = $fa[0]['is_regged'];
         if($exists) {
             http_response_code(301);
             $_SESSION['code'] = $code;
