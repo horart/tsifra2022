@@ -183,6 +183,13 @@ html {
 #kont .a img {
     width: 250px;
     height: auto;
+    margin: 15px;
+}
+
+#kont .b img {
+    width: 250px;
+    margin: 15px;
+    height: auto;
 }
 
 #kont .b {
