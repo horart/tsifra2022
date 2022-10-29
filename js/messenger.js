@@ -2,15 +2,23 @@ var img_bool = false;
 var img_code = 0;
 
 function send() {
-    var messege_txt = $('#kont .text input').val();
-    if (messege_txt != '') {
-        $('#kont #backgroundofkont #messages').append('<li class="b">' + messege_txt + '</li>');
+    var message_txt = $('#kont .text input').val();
+    if (message_txt != '') {
+        $('#kont #backgroundofkont #messages').append('<li class="b">' + message_txt + '</li>');
         $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
         $('#kont .text input').val('').empty();
+
     }
+}
 
-
-
+function new_message(text, name, img) {
+    if (img != '') {
+        $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '<img src="' + img + '" /></li>');
+        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+        return
+    }
+    $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '</li>');
+    $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 }
 
 async function uploadFile() {
@@ -52,8 +60,6 @@ function upload(selector, accept) {
                 prw_div.classList.add("prw_div")
                 img_del.classList.add("img_del")
                 img.setAttribute("src", ev.target.result)
-                img.setAttribute("height", "200px")
-                img.setAttribute("width", "250px")
                 $("#backgroundofkont").css("height", "calc(100% - 325px)")
                 prw_div.insertAdjacentElement("afterbegin", img)
                 prw_div.insertAdjacentElement("afterbegin", img_del)
@@ -96,12 +102,6 @@ $(document).ready(function() {
             send();
         }
     });
-
-
-    //alert($('#kont #messages li:first').height());
-
-    //$('#kont #messages li').css('top', $(this).prev().height()+'px');
-
 
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 
