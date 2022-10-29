@@ -66,7 +66,7 @@ switch ($_GET['type']) {
         }
         $pq = $db->prepare('SELECT content, is_image, date, sender.name
         FROM messages INNER JOIN codes ON codes.house = messages.house INNER JOIN codes AS sender ON codes.code = messages.code
-        WHERE is_problem = 0 AND codes.code = ? AND messages.date > ?
+        WHERE is_problem = 0 AND codes.code = ? AND UNIX_TIMESTAMP(messages.date) > ? AND messages.code != codes.code
         ORDER BY date ASC');
         $pq->execute([$code, $last]);
         $fa = $pq->fetchAll();
