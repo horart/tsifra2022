@@ -145,7 +145,7 @@ $(document).ready(function() {
     let requestOptions = {
         method: 'POST',
     };
-    fetch("/ajax.php?type=poll", requestOptions)
+    fetch("/ajax.php?type=init", requestOptions)
         .then(response => response.json())
         .then(function(res) {
             res.forEach(msg => {
