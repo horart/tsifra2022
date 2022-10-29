@@ -1,6 +1,7 @@
 <?php
 require('config.php');
 session_start();
+session_destroy();
 $code = $_SESSION['code'];
 $db = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS);
 $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
@@ -60,7 +61,7 @@ switch ($_GET['type']) {
             http_response_code(403);
             exit();
         }
-        if(isset($_SESSION['last'])) {
+        if($_SESSION['last']) {
             $last = $_SESSION['last'];
         }else{
             $last = 0;
