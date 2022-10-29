@@ -38,6 +38,7 @@ function poll() {
 }
 
 function send() {
+    $("#backgroundofkont").css("height", "calc(100% - 105px)")
     var message_txt = $('#kont .text input').val();
     if (message_txt != '') {
         let formData = new FormData();
@@ -107,7 +108,7 @@ function upload(selector, accept) {
                     img_bool = false
                     img_code = 0;
                     preview.innerHTML = '';
-                    $("#backgroundofkont").css("height", "calc(100% - 105px)")
+
 
                 })
             }
