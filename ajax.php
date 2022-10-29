@@ -1,4 +1,5 @@
 <?php
+unset($_SESSION['last']);
 require('config.php');
 session_start();
 $code = $_SESSION['code'];
