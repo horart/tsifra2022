@@ -149,7 +149,7 @@ $(document).ready(function() {
         .then(response => response.json())
         .then(function(res) {
             res.forEach(msg => {
-                let is_image = msg['is_image'] ? 1 : 0;
+                let is_image = (msg['is_image'] == "1") ? 1 : 0;
                 if(msg['mine']) {
                     my_new_message(is_image ? '' : msg['content'], is_image ? '/attachments/' + msg['content'] + '.jpg' : undefined);
                 }
