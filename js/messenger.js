@@ -51,6 +51,7 @@ function send() {
             method: "POST",
             body: formData
         });
+        preview.innerHTML = '';
     }
 }
 
