@@ -51,6 +51,7 @@ function send() {
             method: "POST",
             body: formData
         });
+        const preview = document.getElementById("img_up");
         preview.innerHTML = '';
     }
 }
