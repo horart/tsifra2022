@@ -1,7 +1,8 @@
 <?php
+require('config.php');
 session_start();
 $code = $_SESSION['code'];
-$db = new PDO('mysql:host=localhost;dbname='.$DB_NAME, $DB_USER, $DB_PASS);
+$db = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS);
 switch ($_GET['type']) {
     case 'reg':
         $code = $_POST['code'];
@@ -53,7 +54,7 @@ switch ($_GET['type']) {
             exit();
         }
         $last = $_POST['last'];
-        
+
         break;
     default:
         # code...
