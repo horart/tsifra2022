@@ -38,6 +38,7 @@ function poll() {
 }
 
 function send() {
+    $("#backgroundofkont").css("height", "calc(100% - 105px)")
     var message_txt = $('#kont .text input').val();
     if (message_txt != '') {
         let formData = new FormData();
@@ -65,7 +66,9 @@ function send() {
         const preview = document.getElementById("img_up");
         preview.innerHTML = '';
         my_new_message(message_txt, img_code)
+        img_bool = false;
     }
+    img_code = 0;
 }
 
 
@@ -107,7 +110,7 @@ function upload(selector, accept) {
                     img_bool = false
                     img_code = 0;
                     preview.innerHTML = '';
-                    $("#backgroundofkont").css("height", "calc(100% - 105px)")
+
 
                 })
             }
@@ -118,10 +121,6 @@ function upload(selector, accept) {
     }
     input.addEventListener("change", changeHandler);
 }
-
-
-
-
 
 
 
