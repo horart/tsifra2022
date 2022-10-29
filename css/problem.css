@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient( rgba(255, 189, 158, 0.906), rgba(254, 132, 79, 0.895), rgba(235, 110, 52, 0.906)), url(1.gfif);
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.box {
+    border-radius: 8px;
+    width: 600px;
+    padding: 45px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(29, 29, 29);
+    text-align: center;
+}
+
+.box h1 {
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.box input[type="text"],
+.box input[type="tel"],
+.box textarea {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #ffffff;
+    padding: 14px 10px;
+    width: 400px;
+    outline: none;
+    color: rgb(255, 123, 52);
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.box input[type="text"]:focus,
+.box input[type="tel"]:focus,
+.box textarea:focus {
+    width: 430px;
+    border-color: rgb(255, 142, 77);
+}
+
+.box input [type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #ffffff;
+    padding: 14px 40px;
+    outline: none;
+    color: aliceblue;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.box input[type="submit"] {
+    background: none;
+    border: 0;
+    display: block;
+    margin: 20px auto;
+    margin-right: 90px;
+    text-align: center;
+    border: 2px solid #ffffff;
+    padding: 14px 40px;
+    width: 200px;
+    outline: none;
+    color: #717171;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.box input[type="submit"]:hover {
+    background: #9a9a9a;
+}
+
+#problem_d {
+    height: 350px;
+}
