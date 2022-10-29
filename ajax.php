@@ -64,8 +64,8 @@ switch ($_GET['type']) {
         }else{
             $last = 0;
         }
-        $pq = $db->prepare('SELECT content, is_image, date, messages.code
-        FROM messages INNER JOIN codes ON codes.house = messages.house
+        $pq = $db->prepare('SELECT content, is_image, date, sender.name
+        FROM messages INNER JOIN codes ON codes.house = messages.house INNER JOIN codes AS sender ON codes.code = messages.code
         WHERE is_problem = 0 AND codes.code = ? AND messages.date > ?
         ORDER BY date ASC');
         $pq->execute([$code, $last]);

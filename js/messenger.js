@@ -2,7 +2,7 @@ var img_bool = false;
 var img_code = 0;
 
 function new_message(text, name, img) {
-    if (img != '') {
+    if (img) {
         $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '<img src="' + img + '" /></li>');
         $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
         return
@@ -19,7 +19,7 @@ function poll() {
         .then(response => response.json())
         .then(function(res) {
             res.forEach(msg => {
-                new_message(msg['text']);
+                new_message(msg['content'], msg['name']);
             })
         })
         .catch(error => console.log('error', error));
