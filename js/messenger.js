@@ -150,7 +150,7 @@ $(document).ready(function() {
         .then(function(res) {
             res.forEach(msg => {
                 let is_image = (msg['is_image'] == "1") ? 1 : 0;
-                if(msg['mine']) {
+                if(msg['mine'] == "1") {
                     my_new_message(is_image ? '' : msg['content'], is_image ? '/attachments/' + msg['content'] + '.jpg' : undefined);
                 }
                 else {
