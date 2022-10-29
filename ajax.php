@@ -3,6 +3,7 @@ require('config.php');
 session_start();
 $code = $_SESSION['code'];
 $db = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS);
+$db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 switch ($_GET['type']) {
     case 'reg':
         $code = $_POST['code'];
@@ -38,20 +39,20 @@ switch ($_GET['type']) {
             http_response_code(403);
             exit();
         }
-        $problem = $_POST['is_problem'];
-        $file = $_POST['is_file'];
+        $problem = $_POST['is_problem'] == '1';
+        $file = $_POST['is_file'] == '1';
         if(!$file) {
             $content = $_POST['text'];
         }else{
             $content = uniqid();
             file_put_contents("attachments/$content.jpg", file_get_contents($_FILES['attachment']));
         }
-        $message = $db->prepare('INSERT is_problem, house, is_image, content INTO messages VALUES (?, 
+        $message = $db->prepare('INSERT INTO messages (code, is_problem, house, is_image, content) VALUES (?, ?, 
             (
                 SELECT house FROM codes WHERE code = ?
             ),
         ?, ?)');
-        $message->execute([$problem, $code, $file, $content]);
+        $message->execute([$code, $problem, $code, $file, $content]);
         break;
     case 'poll':
         if(!$code) {
@@ -63,8 +64,8 @@ switch ($_GET['type']) {
         }else{
             $last = 0;
         }
-        $pq = $db->prepare('SELECT content, is_image, date, messages.code
-        FROM messages INNER JOIN codes ON codes.house = messages.house
+        $pq = $db->prepare('SELECT content, is_image, date, sender.name
+        FROM messages INNER JOIN codes ON codes.house = messages.house INNER JOIN codes AS sender ON codes.code = messages.code
         WHERE is_problem = 0 AND codes.code = ? AND messages.date > ?
         ORDER BY date ASC');
         $pq->execute([$code, $last]);

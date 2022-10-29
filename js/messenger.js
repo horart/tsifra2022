@@ -1,18 +1,8 @@
 var img_bool = false;
 var img_code = 0;
 
-function send() {
-    var message_txt = $('#kont .text input').val();
-    if (message_txt != '') {
-        $('#kont #backgroundofkont #messages').append('<li class="b">' + message_txt + '</li>');
-        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
-        $('#kont .text input').val('').empty();
-
-    }
-}
-
 function new_message(text, name, img) {
-    if (img != '') {
+    if (img) {
         $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '<img src="' + img + '" /></li>');
         $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
         return
@@ -21,14 +11,47 @@ function new_message(text, name, img) {
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 }
 
-async function uploadFile() {
-    let formData = new FormData();
-    formData.append("file", fileupload.files[0]);
-    await fetch('/ajax.php?type=message', {
-        method: "POST",
-        body: formData
-    });
-    alert('The file has been uploaded successfully.');
+function poll() {
+    let requestOptions = {
+        method: 'POST',
+    };
+
+    fetch("/ajax.php?type=poll", requestOptions)
+        .then(response => response.json())
+        .then(function(res) {
+            res.forEach(msg => {
+                new_message(msg['content'], msg['name']);
+            })
+        })
+        .catch(error => console.log('error', error));
+}
+
+function send() {
+    var message_txt = $('#kont .text input').val();
+    if (message_txt != '') {
+        $('#kont #backgroundofkont #messages').append('<li class="b">' + message_txt + '</li>');
+        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+        $('#kont .text input').val('').empty();
+        let formData = new FormData();
+        formData.append("text", message_txt);
+        formData.append("is_file", 0);
+        formData.append("is_problem", 0);
+        fetch('/ajax.php?type=message', {
+            method: "POST",
+            body: formData
+        });
+    }
+    if (img_bool) {
+        let img = document.getElementById('fileupload').files[0];
+        let formData = new FormData();
+        formData.append("attachment", img);
+        formData.append("is_file", 1);
+        formData.append("is_problem", 0);
+        fetch('/ajax.php?type=message', {
+            method: "POST",
+            body: formData
+        });
+    }
 }
 
 
@@ -107,5 +130,5 @@ $(document).ready(function() {
 
     $('#kont .send').css('cursor', 'pointer');
 
-
+    setInterval(poll, 1000);
 });

@@ -10,7 +10,6 @@ avatar -- аватар
 
 2. ajax.php?type=message
 POST:
-code -- код усера
 is_file -- 1 если файл, 0 если нет
 is_problem -- 1 если проблема, 0 если нет
 text -- текст
