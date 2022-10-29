@@ -70,7 +70,7 @@ switch ($_GET['type']) {
         WHERE is_problem = 0 AND messages.house = (SELECT house FROM codes AS cc WHERE cc.code = ?)
         AND codes.code != ? AND id > ?
         ORDER BY date ASC');
-        $pq->execute([$code, $code, $code, $last]);
+        $pq->execute([$code, $code, $last]);
         $fa = $pq->fetchAll();
         if($i = count($fa)) {
             $_SESSION['last'] = $fa[$i-1]['id'];
