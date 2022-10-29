@@ -1,13 +1,19 @@
 <?php
+require('config.php');
 session_start();
 $code = $_SESSION['code'];
-$db = new PDO('mysql:host=localhost;dbname='.$DB_NAME, $DB_USER, $DB_PASS);
+$db = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS);
 switch ($_GET['type']) {
     case 'reg':
         $code = $_POST['code'];
         $search = $db->prepare('SELECT is_regged FROM codes WHERE code = ?');
-        $search->execute([$search]);
-        $exists = count($search->fetchAll())
+        $search->execute([$code]);
+        $fa = $search->fetchAll();
+        if(!count($fa)) {
+            http_response_code(403);
+            exit();
+        }
+        $exists = $fa[0]['is_regged'];
         if($exists) {
             http_response_code(301);
             $_SESSION['code'] = $code;
@@ -18,7 +24,7 @@ switch ($_GET['type']) {
                 exit();
             }else{
                 $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, avatar = ?, is_regged = 1 WHERE code = ?');
-                $file = $_FILES['avatar']
+                $file = $_FILES['avatar'];
                 $avatar = uniqid();
                 file_put_contents("avatars/$avatar.jpg", file_get_contents($file['tmp_name']));
                 $_SESSION['code'] = $code;
@@ -46,6 +52,27 @@ switch ($_GET['type']) {
             ),
         ?, ?)');
         $message->execute([$problem, $code, $file, $content]);
+        break;
+    case 'poll':
+        if(!$code) {
+            http_response_code(403);
+            exit();
+        }
+        if(isset($_SESSION['last'])) {
+            $last = $_SESSION['last'];
+        }else{
+            $last = 0;
+        }
+        $pq = $db->prepare('SELECT content, is_image, date, messages.code
+        FROM messages INNER JOIN codes ON codes.house = messages.house
+        WHERE is_problem = 0 AND codes.code = ? AND messages.date > ?
+        ORDER BY date ASC');
+        $pq->execute([$code, $last]);
+        $fa = $pq->fetchAll();
+        $_SESSION['last'] = time();
+        header('Content-Type: application/json');
+        exit(json_encode($fa));
+
         break;
     default:
         # code...
