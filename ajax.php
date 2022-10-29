@@ -7,7 +7,7 @@ switch ($_GET['type']) {
         $code = $_POST['code'];
         $search = $db->prepare('SELECT is_regged FROM codes WHERE code = ?');
         $search->execute([$search]);
-        $exists = count($search->fetchAll())
+        $exists = count($search->fetchAll());
         if($exists) {
             http_response_code(301);
             $_SESSION['code'] = $code;
@@ -18,7 +18,7 @@ switch ($_GET['type']) {
                 exit();
             }else{
                 $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, avatar = ?, is_regged = 1 WHERE code = ?');
-                $file = $_FILES['avatar']
+                $file = $_FILES['avatar'];
                 $avatar = uniqid();
                 file_put_contents("avatars/$avatar.jpg", file_get_contents($file['tmp_name']));
                 $_SESSION['code'] = $code;
@@ -46,6 +46,13 @@ switch ($_GET['type']) {
             ),
         ?, ?)');
         $message->execute([$problem, $code, $file, $content]);
+        break;
+    case 'poll':
+        if(!$code) {
+            http_response_code(403);
+            exit();
+        }
+        
         break;
     default:
         # code...
