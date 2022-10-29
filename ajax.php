@@ -65,15 +65,20 @@ switch ($_GET['type']) {
         }else{
             $last = 0;
         }
-        $pq = $db->prepare('SELECT content, is_image, date, sender.name
-        FROM messages INNER JOIN codes ON codes.house = messages.house INNER JOIN codes AS sender ON codes.code = messages.code
-        WHERE is_problem = 0 AND codes.code = ? AND UNIX_TIMESTAMP(messages.date) > ? AND messages.code != codes.code
+        $pq = $db->prepare('SELECT id, content, is_image, date, codes.name
+        FROM messages INNER JOIN codes ON codes.code = messages.code
+        WHERE is_problem = 0 AND messages.house = (SELECT house FROM codes AS cc WHERE cc.code = ?)
+        AND codes.code != ? AND id > ?
         ORDER BY date ASC');
-        $pq->execute([$code, $last]);
+        $pq->execute([$code, $code, $last]);
         $fa = $pq->fetchAll();
-        $_SESSION['last'] = time();
-        header('Content-Type: application/json');
-        exit(json_encode($fa));
+        if($i = count($fa)) {
+            $_SESSION['last'] = $fa[$i-1]['id'];
+        }
+        if($last) {
+            header('Content-Type: application/json');
+            exit(json_encode($fa));
+        }
         break;
     
     case 'init':
@@ -81,11 +86,11 @@ switch ($_GET['type']) {
             http_response_code(403);
             exit();
         }
-        $pq = $db->prepare('SELECT content, is_image, date, sender.name, (sender.code = codes.code) AS mine
-        FROM messages INNER JOIN codes ON codes.house = messages.house INNER JOIN codes AS sender ON codes.code = messages.code
-        WHERE is_problem = 0 AND codes.code = ?
+        $pq = $db->prepare('SELECT content, is_image, date, codes.name, (codes.code = ?) AS mine
+        FROM messages INNER JOIN codes ON codes.code = messages.code
+        WHERE is_problem = 0 AND messages.house = (SELECT house FROM codes AS cc WHERE cc.code = ?)
         ORDER BY date ASC');
-        $pq->execute([$code]);
+        $pq->execute([$code, $code]);
         $fa = $pq->fetchAll();
         header('Content-Type: application/json');
         exit(json_encode($fa));
