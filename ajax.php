@@ -46,7 +46,7 @@ switch ($_GET['type']) {
             $content = uniqid();
             file_put_contents("attachments/$content.jpg", file_get_contents($_FILES['attachment']));
         }
-        $message = $db->prepare('INSERT is_problem, house, is_image, content INTO messages VALUES (?, 
+        $message = $db->prepare('INSERT INTO messages (is_problem, house, is_image, content) VALUES (?, 
             (
                 SELECT house FROM codes WHERE code = ?
             ),
