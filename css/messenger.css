@@ -252,6 +252,10 @@ input[type="file"] {
     display: none;
 }
 
+.controls {
+    width: 100%;
+}
+
 .name {
     font-size: 20px;
     color: rgb(0, 0, 0);
