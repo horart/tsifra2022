@@ -13,7 +13,7 @@ function new_message(text, name, img) {
 
 function my_new_message(text, img) {
     if (img) {
-        $('#kont #backgroundofkont #messages').append('<li class="b">' + text + '<img src="' + img + '" /></li>');
+        $('#kont #backgroundofkont #messages').append('<li class="b">' + text + '<br><img src="' + img + '" /></li>');
         $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
         return
     }
@@ -39,9 +39,6 @@ function poll() {
 function send() {
     var message_txt = $('#kont .text input').val();
     if (message_txt != '') {
-        $('#kont #backgroundofkont #messages').append('<li class="b">' + message_txt + '</li>');
-        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
-        $('#kont .text input').val('').empty();
         let formData = new FormData();
         formData.append("text", message_txt);
         formData.append("is_file", 0);
@@ -50,6 +47,9 @@ function send() {
             method: "POST",
             body: formData
         });
+        if (!img_bool) {
+            my_new_message(message_txt)
+        }
     }
     if (img_bool) {
         let img = document.getElementById('fileupload').files[0];
@@ -63,6 +63,7 @@ function send() {
         });
         const preview = document.getElementById("img_up");
         preview.innerHTML = '';
+        my_new_message(message_txt, img_code)
     }
 }
 
