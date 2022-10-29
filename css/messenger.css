@@ -157,8 +157,11 @@ html {
     position: absolute;
     width: 100%;
     height: calc(100% - 105px);
-    background: rgba(255, 255, 255, 0.2);
-    opacity: 0.9;
+    background: linear-gradient(
+        rgba(255, 189, 158, 0.906),
+        rgba(254, 132, 79, 0.895),
+        rgba(235, 110, 52, 0.906)
+      ),
 }
 
 #kont #messages li {
