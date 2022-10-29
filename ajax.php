@@ -58,7 +58,20 @@ switch ($_GET['type']) {
             http_response_code(403);
             exit();
         }
-        $last = $_POST['last'];
+        if(isset($_SESSION['last'])) {
+            $last = $_SESSION['last'];
+        }else{
+            $last = 0;
+        }
+        $pq = $db->prepare('SELECT content, is_image, date, messages.code
+        FROM messages INNER JOIN codes ON codes.house = messages.house
+        WHERE is_problem = 0 AND codes.code = ? AND messages.date > ?
+        ORDER BY date ASC');
+        $pq->execute([$code, $last]);
+        $fa = $pq->fetchAll();
+        $_SESSION['last'] = time();
+        header('Content-Type: application/json');
+        exit(json_encode($fa));
 
         break;
     default:
