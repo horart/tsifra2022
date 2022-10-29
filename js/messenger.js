@@ -1,8 +1,13 @@
 var img_bool = false;
 var img_code = 0;
 
-function new_message(text, name) {
-    $('#kont #backgroundofkont #messages').append('<li class="a">' + text + '</li>');
+function new_message(text, name, img) {
+    if (img != '') {
+        $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '<img src="' + img + '" /></li>');
+        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+        return
+    }
+    $('#kont #backgroundofkont #messages').append('<li class="a"><div class="name">' + name + '</div>' + text + '</li>');
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 }
 function poll() {
