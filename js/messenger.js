@@ -67,6 +67,7 @@ function send() {
         preview.innerHTML = '';
         my_new_message(message_txt, img_code)
     }
+    img_code = 0;
 }
 
 
