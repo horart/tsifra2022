@@ -142,7 +142,9 @@ $(document).ready(function() {
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 
     $('#kont .send').css('cursor', 'pointer');
-    
+    let requestOptions = {
+        method: 'POST',
+    };
     fetch("/ajax.php?type=poll", requestOptions)
         .then(response => response.json())
         .then(function(res) {
