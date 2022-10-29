@@ -11,13 +11,13 @@ function new_message(text, name, img) {
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 }
 
-function my_new_message(text, name, img) {
+function my_new_message(text, img) {
     if (img) {
-        $('#kont #backgroundofkont #messages').append('<li class="b"><div class="name">' + name + '</div>' + text + '<img src="' + img + '" /></li>');
+        $('#kont #backgroundofkont #messages').append('<li class="b">' + text + '<img src="' + img + '" /></li>');
         $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
         return
     }
-    $('#kont #backgroundofkont #messages').append('<li class="b"><div class="name">' + name + '</div>' + text + '</li>');
+    $('#kont #backgroundofkont #messages').append('<li class="b">' + text + '</li>');
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 }
 
