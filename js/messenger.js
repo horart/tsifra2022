@@ -11,6 +11,16 @@ function new_message(text, name, img) {
     $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 }
 
+function my_new_message(text, name, img) {
+    if (img) {
+        $('#kont #backgroundofkont #messages').append('<li class="b"><div class="name">' + name + '</div>' + text + '<img src="' + img + '" /></li>');
+        $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+        return
+    }
+    $('#kont #backgroundofkont #messages').append('<li class="b"><div class="name">' + name + '</div>' + text + '</li>');
+    $("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+}
+
 function poll() {
     let requestOptions = {
         method: 'POST',
