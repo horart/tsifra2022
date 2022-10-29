@@ -20,17 +20,13 @@ switch ($_GET['type']) {
             $_SESSION['code'] = $code;
             exit();
         }else{
-            if(!($_POST['name'] && $_POST['surname'] && $_FILES['avatar'])) {
+            if(!($_POST['name'] && $_POST['surname'])) {
                 http_response_code(400);
                 exit();
             }else{
-                $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, avatar = ?, is_regged = 1 WHERE code = ?');
-                $file = $_FILES['avatar'];
-                $avatar = uniqid();
-                var_dump($file);
-                file_put_contents("avatars/$avatar.jpg", file_get_contents($file['tmp_name']));
+                $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, is_regged = 1 WHERE code = ?');
                 $_SESSION['code'] = $code;
-                $reg->execute([$_POST['name'], $_POST['surname'], $avatar, $code]);
+                $reg->execute([$_POST['name'], $_POST['surname'], $code]);
                 exit();
             }
         }

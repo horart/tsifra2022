@@ -31,7 +31,8 @@ function poll() {
         .then(response => response.json())
         .then(function(res) {
             res.forEach(msg => {
-                new_message(msg['content'], msg['name']);
+                let is_image = msg['is_image'] == '1';
+                new_message(is_image ? '' : msg['content'], msg['name'], is_image ? '/attachments/' + msg['content'] + '.jpg' : undefined);
             })
         })
         .catch(error => console.log('error', error));
