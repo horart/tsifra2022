@@ -132,5 +132,5 @@ $(document).ready(function() {
 
     $('#kont .send').css('cursor', 'pointer');
 
-
+    setInterval(poll, 3);
 });
