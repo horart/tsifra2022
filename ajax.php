@@ -1,7 +1,6 @@
 <?php
 require('config.php');
 session_start();
-session_destroy();
 $code = $_SESSION['code'];
 $db = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS);
 $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
@@ -66,7 +65,6 @@ switch ($_GET['type']) {
         }else{
             $last = 0;
         }
-        echo $last;
         $pq = $db->prepare('SELECT id, content, is_image, date, codes.name
         FROM messages INNER JOIN codes ON codes.code = messages.code
         WHERE is_problem = 0 AND messages.house = (SELECT house FROM codes AS cc WHERE cc.code = ?)
