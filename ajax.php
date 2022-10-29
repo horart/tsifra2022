@@ -73,7 +73,7 @@ switch ($_GET['type']) {
         $pq->execute([$code, $code, $code, $last]);
         $fa = $pq->fetchAll();
         if($i = count($fa)) {
-            $_SESSION['last'] = $fa[$i-1]['id']
+            $_SESSION['last'] = $fa[$i-1]['id'];
         }
         if($last) {
             header('Content-Type: application/json');
