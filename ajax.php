@@ -27,6 +27,7 @@ switch ($_GET['type']) {
                 $reg = $db->prepare('UPDATE codes SET name = ?, surname = ?, avatar = ?, is_regged = 1 WHERE code = ?');
                 $file = $_FILES['avatar'];
                 $avatar = uniqid();
+                var_dump($file);
                 file_put_contents("avatars/$avatar.jpg", file_get_contents($file['tmp_name']));
                 $_SESSION['code'] = $code;
                 $reg->execute([$_POST['name'], $_POST['surname'], $avatar, $code]);
