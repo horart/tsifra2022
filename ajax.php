@@ -65,6 +65,7 @@ switch ($_GET['type']) {
         }else{
             $last = 0;
         }
+        var_dump($last);
         $pq = $db->prepare('SELECT content, is_image, date, codes.name, (codes.code = ?) AS mine
         FROM messages INNER JOIN codes ON codes.code = messages.code
         WHERE is_problem = 0 AND messages.house = (SELECT house FROM codes AS cc WHERE cc.code = ?)
