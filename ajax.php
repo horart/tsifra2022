@@ -7,7 +7,7 @@ switch ($_GET['type']) {
     case 'reg':
         $code = $_POST['code'];
         $search = $db->prepare('SELECT is_regged FROM codes WHERE code = ?');
-        $search->execute([$search]);
+        $search->execute([$code]);
         $exists = count($search->fetchAll());
         if($exists) {
             http_response_code(301);
